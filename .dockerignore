@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker (don't copy these into image)
+Dockerfile*
+docker-compose*.yml
+.dockerignore*
+
+# Documentation
+README*.md
+*.md
+docs/
+
+# Test files
+tests/
+test_*.py
+*_test.py
+.pytest_cache/
+.coverage
+htmlcov/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Cache directories
+.cache/
+*.cache
+
+# Audio files (if you don't want to copy test audio)
+*.wav
+*.mp3
+*.flac
+*.ogg
+
+# Don't copy the model if it's going to be mounted
+# Uncomment if you want to mount instead of copy
+# LFM2-Audio-1.5B/
