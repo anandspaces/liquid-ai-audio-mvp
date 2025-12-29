@@ -1,0 +1,32 @@
+services:
+  liquid-ai-audio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: liquid-ai-audio
+    environment:
+      - HF_HOME=/root/.cache/huggingface
+      # Optimize for 12 cores
+      - OMP_NUM_THREADS=12
+      - MKL_NUM_THREADS=12
+      - OPENBLAS_NUM_THREADS=12
+      # Disable tokenizers parallelism warning
+      - TOKENIZERS_PARALLELISM=false
+    ports:
+      - "8091:8091"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      - ./api_server_audio.py:/app/api_server_audio.py
+      - ./api_client_audio.py:/app/api_client_audio.py
+      - ./main_audio.py:/app/main_audio.py
+      # Optional: Mount local model directory
+      # - ./LFM2-Audio-1.5B:/models/LFM2-Audio-1.5B
+    restart: unless-stopped
+    # Add healthcheck
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8091/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 180s  # Audio model takes longer to load
+    command: python api_server_audio.py
